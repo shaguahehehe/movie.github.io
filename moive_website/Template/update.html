@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改电影</title>
+</head>
+<link href="/static/css/bootstrap.css" rel="stylesheet">
+<style>
+    table {
+        text-align: center;
+    }
+
+    body {
+        background: #00f7de;
+    }
+</style>
+<body>
+
+<br>
+<br>
+<br>
+
+    <div class="container">
+        <form class="table table-bordered table-hover" action="{% url 'updatemiove' %}" method="post">
+            {% csrf_token %}
+
+                <input type="hidden" name="id" value="{{ moive.id }}"/>
+{#                <tr>#}
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">电影名字</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" name="title"  value="{{ moive.title }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">电影信息</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" name="info"  value="{{ moive.info }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">电影信息</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" name="area"  value="{{ moive.area}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">电影类型</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" name="type" value="{{ moive.type }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">电影主演</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" name="star" value="{{ moive.star }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">电影别名</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" name="alias" value="{{ moive.alias }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">电影年份/label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" name="year" value="{{ moive.year }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">电影语言</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" name="language" value="{{ moive.language }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">电影分类</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" name="moive_id" value="{% if moive.moive_id == 1 %}电影{% elif moive.moive_id == 2 %}连续剧{% elif moive.moive_id == 3 %}综艺{% else %}动漫{% endif %} ">
+                    </div>
+            <input type="submit" class="btn btn-info" value="修改信息">
+        </form>
+    </div>
+
+</body>
+<script src="/static/js/jquery-3.6.0.js"/>
+<script src="/static/js/bootstrap.js"/>
+</html>

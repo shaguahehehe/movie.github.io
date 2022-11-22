@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新增电影</title>
+</head>
+<link href="/static/css/bootstrap.css" rel="stylesheet">
+<style>
+    table {
+        text-align: center;
+    }
+
+    body {
+        background: #00f7de;
+    }
+</style>
+<body>
+
+<br>
+<br>
+<br>
+
+    <div class="container">
+        <form class="table table-bordered table-hover" action="{% url 'insert' %}" method="post">
+            {% csrf_token %}
+
+                <input type="hidden" name="id" />
+{#                <tr>#}
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">电影名字</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" name="title" >
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">电影信息</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" name="info"  >
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">电影地区</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" name="area"  >
+                    </div>
+             <div class="form-group">
+                        <label for="exampleInputPassword1">电影图片地址</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" name="img"  >
+                    </div>
+            <div class="form-group">
+                        <label for="exampleInputPassword1">电影导演</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" name="director"  >
+                    </div>
+            <div class="form-group">
+                        <label for="exampleInputPassword1">电影评分</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" name="score"  >
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">电影类型</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" name="type">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">电影主演</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" name="star" >
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">电影别名</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" name="alias" >
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">电影年份</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" name="year" >
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">电影语言</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" name="language" >
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">电影分类</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" name="moive_id" >
+                    </div>
+            <input type="submit" class="btn btn-info" value="新增信息">
+        </form>
+    </div>
+
+</body>
+<script src="/static/js/jquery-3.6.0.js"/>
+<script src="/static/js/bootstrap.js"/>
+</html>

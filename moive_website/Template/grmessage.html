@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人信息</title>
+</head>
+<link href="/static/css/bootstrap.css" rel="stylesheet">
+<style>
+    table{
+        text-align: center;
+    }
+</style>
+<body>
+
+<br>
+<br>
+<br>
+
+<div class="container">
+<form  action="{% url 'updatemanager' %}" method="post">
+                       {% csrf_token %}
+    <input type="hidden" name="id" value="{{ stu.id }}"/>
+<div class="panel panel-info">
+ <div class="panel-body">
+    <tr><td>用户名:<input type="text" class="form-control" name="name" value="{{ stu.name }}"><br><br></td></tr>
+    <tr><td>旧 密 码:<input type="password"  class="form-control" name="oldpwd"  ><br><br></td></tr>
+     <tr><td>新密码:<input type="password"  class="form-control" name="password" ><br><br></td></tr>
+     <tr><td>确认密码:<input type="password"  class="form-control" name="confirm" ><br><br></td></tr>
+    <input type="submit" class="btn btn-info" value="修改信息">
+  </div>
+</div>
+</form>
+</div>
+</body>
+<script src="/static/js/jquery-3.6.0.js"></script>
+<script src="/static/js/bootstrap.js"></script>
+<script>
+    function confirm_blur() {
+            var x = document.getElementById("confirm").value;
+            var y = document.getElementById("password").value;
+
+        }
+</script>
+</html>

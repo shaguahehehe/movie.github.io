@@ -1,0 +1,49 @@
+$(function (){
+         $.ajax({
+             url:{% url 'select_moive' %},
+             type:"GET",
+             success:function (res) {
+                 if (res.length != 0) {
+                     var html1 = ""
+                     html1_count=0
+                     var html2 = ""
+                     html2_count=0
+                     for (var i = 0; i < res.length; i++) {
+                         if (res[i].moive_id == 1) {
+                             if (html1_count != 6){
+                                  html1_count=html1_count+1
+                             html1 = html1 + ' <div class="col mb-4"> <div class="card1">' +
+                                 '<img src=' + res[i].img + ' class="card-img-top" alt="..."  ><div class="card-body" ><p class="card-text">' + res[i].title + '</p></div></div></div>'
+                             }
+                         }
+                          if (res[i].moive_id == 2) {
+                              if (html2_count != 6) {
+                                  html2_count=html2_count+1
+                                  html2 = html2 + ' <div class="col mb-4"> <div class="card1">' +
+                                      '<img src=' + res[i].img + ' class="card-img-top" alt="..."  ><div class="card-body" ><p class="card-text">' + res[i].title + '</p></div></div></div>'
+                              }
+                          }
+                          if (res[i].moive_id == 2) {
+                              if (html2_count != 6) {
+                                  html2_count=html2_count+1
+                                  html2 = html2 + ' <div class="col mb-4"> <div class="card1">' +
+                                      '<img src=' + res[i].img + ' class="card-img-top" alt="..."  ><div class="card-body" ><p class="card-text">' + res[i].title + '</p></div></div></div>'
+                              }
+                          }
+
+                     }
+                     $("#diany").html(html1)
+                     $("#lianxju").html(html2)
+                 }
+             },
+             error:function (error) {
+                 console.log(error)
+             }
+         }
+         )
+     })
+
+
+.play_name:hover .ico_play{
+    background-image: url(ico_play.png);
+}

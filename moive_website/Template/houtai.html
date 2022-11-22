@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<html lang="en" >
+<head>
+<meta charset="UTF-8">
+<title> 电影后台</title>
+{% load static %}
+
+<!--固定框架-->
+<link rel='stylesheet' href='/static/css/bootstrap.min.css'>
+
+<!--图标库-->
+<link rel='stylesheet' href='/static/css/material-design-iconic-font.min.css'>
+ <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!--核心样式-->
+<link rel="stylesheet" href="/static/css/style.css">
+<style>
+    #user{
+        padding: 5px;
+    }
+    .daochu{
+        float: right;
+    }
+    .navbar{
+        min-height: 40px;
+    }
+ #sidebar{
+    position: absolute;
+}
+ #page{
+     position: relative;
+     left: 100px;
+ }
+    .round_icon{
+  width: 34px;
+  height: 34px;
+  display: flex;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;}
+    li{
+        display: block;
+    }
+    #long{
+
+width:50px;
+
+word-break:keep-all;     /* 不换行 */
+
+white-space:nowrap;      /* 不换行 */
+
+  white-space:nowrap;
+        overflow:hidden;
+        text-overflow: ellipsis;
+
+}
+    span{
+        display: inline;
+    }
+
+</style>
+</head>
+<body>
+
+<div id="viewport">
+
+  <!-- Sidebar -->
+  <div id="sidebar" >
+    <header>
+      <a href="#" style="text-align: center">电影后台管理</a>
+    </header>
+    <ul class="nav">
+      <li>
+        <a href="{% url 'grmessage' %}">
+          <i class="zmdi zmdi-link"></i> 个人信息
+       </a>
+      </li>
+        <li>
+        <a href="{% url 'moivecount' %}">
+          <i class="zmdi zmdi-link"></i> 查看电影评分分布
+       </a>
+      </li>
+        <li>
+        <a href="{% url 'pingf' %}">
+          <i class="zmdi zmdi-link"></i> 查看电影类型统计
+       </a>
+      </li>
+         <li>
+        <a href="{% url 'todata' %}">
+          <i class="zmdi zmdi-link"></i> 批量导入
+       </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Content -->
+  <div id="content">
+    <nav class="navbar navbar-default" style="height: 40px">
+      <div class="container-fluid" style="height: 40px">
+        <ul class="nav navbar-nav navbar-right">
+            <li  id="toux">
+                <img src="{% static '1.png' %} " class="round_icon">
+            </li>
+          <li id="user">
+          {{ request.session.manager }}
+          </li>
+        </ul>
+      </div>
+    </nav>
+  <center>
+    <form action="{% url 'sous' 1 %}" >
+    <input type="text" placeholder="请填入所要查找的电影名" name="sous"/>
+<input type="submit" class="btn btn-success btn-sm" value="搜索">     <span class="btn btn-danger btn-sm" onclick="logout()">退出</span>
+        <a id="daochu" class="btn btn-primary btn-sm" href="{% url 'toexcel' %}">导出excel</a>
+</form>
+  </center>
+<button class="btn-info btn-sm" onclick="insert()" data-toggle="modal" data-target="#myModal" >新增</button>
+
+
+
+</div>
+    <div class="container-fluid" >
+      <div class=".container-fluid" id="biaoge">
+    <table class="table table-bordered table-hover " style="table-layout: fixed;" >
+
+        <tr>
+            <td>电&nbsp&nbsp影&nbsp&nbspI&nbsp&nbspD</td>
+            <td>电&nbsp&nbsp影&nbsp&nbsp名&nbsp&nbsp字</td>
+        <td>电&nbsp&nbsp影&nbsp&nbsp信&nbsp&nbsp息</td>
+            <td>图&nbsp&nbsp片&nbsp&nbsp路&nbsp&nbsp径</td>
+        <td>电&nbsp&nbsp影&nbsp&nbsp地&nbsp&nbsp区</td>
+        <td>电&nbsp&nbsp影&nbsp&nbsp年&nbsp&nbsp份</td>
+            <td>电&nbsp&nbsp影&nbsp&nbsp语&nbsp&nbsp言</td>
+        <td>电&nbsp&nbsp影&nbsp&nbsp主&nbsp&nbsp演</td>
+            <td>电&nbsp&nbsp影&nbsp&nbsp别&nbsp&nbsp名</td>
+            <td>电&nbsp&nbsp影&nbsp&nbsp类&nbsp&nbsp型</td>
+            <td>电&nbsp&nbsp影&nbsp&nbsp分&nbsp&nbsp类</td>
+        <td>电&nbsp&nbsp影&nbsp&nbsp分&nbsp&nbsp数</td>
+        <td>操作</td></tr>
+        {% for movie in clist %}
+            <tr>
+        <td>{{ movie.id }}</td>
+        <td id="long">{{ movie.title }}</td>
+        <td id="long">{{ movie.info }}</td>
+        <td id="long">{{ movie.img }}</td>
+        <td>{{ movie.area }}</td>
+        <td>{{ movie.year }}</td>
+        <td>{{ movie.language }}</td>
+                <td id="long">{{ movie.star }}</td>
+        <td>{{ movie.alias }}</td>
+         <td>{{ movie.type }}</td>
+                <td  values="">
+                    {% if  movie.moive_id  == 1 %}
+                    电影
+                    {% elif  movie.moive_id  == 2 %}
+                    连续剧
+                    {% elif  movie.moive_id  == 3 %}
+                    综艺
+                    {% else%}
+                    动漫
+                    {% endif %}
+                </td>
+        <td>{{ movie.score }}</td>
+            <td> <span class="btn btn-danger btn-sm" id="delect" onclick="delect({{ movie.id }})">删除</span><span class="btn btn-warning btn-sm" id="update" onclick="update({{ movie.id }})">修改</span></td>
+     </tr>
+     {% endfor %}
+
+</table>
+</div>
+    </div>
+  </div>
+</div>
+
+<ul class="pager" id="page">
+	<li><a href="{% url 'houtaishouye' currpage|add:-1 %}">上一页</a></li>
+	<li><a href="{% url 'houtaishouye' currpage|add:+1 %}">下一页</a></li>
+</ul>
+
+</body>
+<script src="/static/js/jquery-3.6.0.js"></script>
+<script src="/static/js/bootstrap.js"></script>
+<script type="text/javascript">
+      function logout(){
+           window.location.href="/tuichu/"
+      }
+   function delect(id){
+          window.location.href="http://127.0.0.1:9000/delectdiany/"+id
+      }
+  function update(id){
+          window.location.href="http://127.0.0.1:9000/updatediany/"+id
+      }
+  function insert(){
+          window.location.href="http://127.0.0.1:9000/insertdiany/"
+      }
+</script>
+</html>

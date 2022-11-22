@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>电影网</title>
+    {% load static %}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="/static/css/iconfont.css" type="text/css"/>
+    <link rel="stylesheet" href="/static/css/stui_block.css" type="text/css"/>
+    <link rel="stylesheet" href="/static/css/stui_block_color.css" type="text/css"/>
+    <link rel="stylesheet" href="/static/css/stui_default.css" type="text/css"/>
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/stui_default.js"></script>
+{#    <script type="text/javascript" src="/static/js/stui_block.js "></script>#}
+    <script type="text/javascript" src="/static/js/home.js"></script>
+    <link rel="stylesheet" href="/static/css/share_style0_24.css">
+     <script src="{% static '/js/jquery-3.6.0.js' %}"></script>
+    <script src="{% static '/js/bootstrap.js' %}"></script>
+    <script src="{% static '/js/axios.js' %}"></script>
+    <script src="{% static '/js/vue.js' %}"></script>
+    <script src="{% static '/js/event.js' %}"></script>
+
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    {#<style>#}
+    {#    .stui-header__search{#}
+    {#        width:300px ;#}
+    {#        height: 30px;#}
+    {##}
+    {#    }#}
+    {#</style>#}
+
+</head>
+<body>
+<div id="content">
+<div >
+<header class="stui-header__top clearfix top-fixed headroom--not-bottom top-fixed-up headroom--top" id="header-top">
+
+        <div class="container">
+            <div class="row">
+                <div class="stui-header_bd clearfix">
+                    <div class="stui-header__logo">
+                        <a class="logo" href="/"></a>
+                    </div>
+                    <div class="stui-header__side">
+                        <ul class="stui-header__user">
+                            <li class="visible-xs"><a class="open-popup" href="javascript:;"><i
+                                    class="icon iconfont icon-viewgallery"></i></a></li>
+                        </ul>
+                        <div class="stui-header__search">
+
+                            <input type="text" id="wd" name="wd" class="mac_wd form-control mac_input" value=""
+                                   placeholder="请输入关键词..." autocomplete="off" style="width: 200px" v-model="sous">
+                            <button class="submit" id="searchbutton" type="submit" name="submit"
+                                    @click="sousmoivemesssage">
+                                <i class="icon iconfont icon-search"></i></button>
+
+                        </div>
+                    </div>
+                    <ul class="stui-header__menu type-slide">
+                        <li><a href="{% url 'index'   %}">首页</a></li>
+                        <li><a href="{% url 'select_fenlei'  1 %}">电影</a></li>
+                        <li><a href="{% url 'select_fenlei'  2 %}">连续剧</a></li>
+                        <li><a href="{% url 'select_fenlei'  3 %}">综艺</a></li>
+                        <li><a href="{% url 'select_fenlei'  4 %}">动漫</a></li>
+                    </ul>
+                    <font color="#007711">
+                    </font></div>
+                <font color="#007711">
+                </font></div>
+            <font color="#007711">
+            </font></div>
+        <font color="#007711">
+        </font>
+</header>
+<div class="popup clearfix">
+    <div class="popup-head bottom-line">
+        <h5 class="title pull-right">全部分类</h5>
+        <a href="javascript:;" class="close-popup">
+            <i class="icon iconfont icon-back"></i>
+        </a>
+    </div>
+    <div class="popup-body col-pd">
+        <ul class="tag tag-type">
+            <li><a href="/show/1-----------.html">电影</a></li>
+            <li><a href="/show/2-----------.html">连续剧</a></li>
+            <li><a href="/show/3-----------.html">综艺</a></li>
+            <li><a href="/show/4-----------.html">动漫</a></li>
+            <li><a href="/show/6-----------.html">动作片</a></li>
+            <li><a href="/show/7-----------.html">喜剧片</a></li>
+            <li><a href="/show/8-----------.html">爱情片</a></li>
+            <li><a href="/show/9-----------.html">科幻片</a></li>
+            <li><a href="/show/10-----------.html">恐怖片</a></li>
+            <li><a href="/show/11-----------.html">剧情片</a></li>
+            <li><a href="/show/12-----------.html">战争片</a></li>
+            <li><a href="/show/22-----------.html">动画片</a></li>
+            <li><a href="/show/25-----------.html">老电影</a></li>
+            <li><a href="/show/13-----------.html">国产剧</a></li>
+            <li><a href="/show/14-----------.html">港台剧</a></li>
+            <li><a href="/show/15-----------.html">日韩剧</a></li>
+            <li><a href="/show/16-----------.html">欧美剧</a></li>
+        </ul>
+    </div>
+</div>
+<div class="container">
+    <input type="hidden" value="{{ sous }}" id="souscontent">
+    <div class="row">
+        <div class="col-lg-wide-75 col-xs-1 padding-0">
+            <div class="stui-pannel stui-pannel-bg clearfix">
+                <div class="stui-pannel-box">
+                    <div class="stui-pannel_hd">
+                        <div class="stui-pannel__head active bottom-line clearfix">
+                            <h3 class="title">
+                                与“{{ sous }}”相关的影片
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="stui-pannel_bd">
+                        <ul class="stui-vodlist__media col-pd clearfix">
+                            {% verbatim myblock %}
+                                <li class="active clearfix" v-for=" moive in sousmoive">
+                                    <div class="thumb">
+                                        <a class="v-thumb stui-vodlist__thumb lazyload" @click="selectmoive(moive.id)"
+                                           :title="moive.title" :data-original="moive.img"
+                                           :style="{backgroundImage: 'url('+moive.img+')'}" >
+
+                                            <span class="play hidden-xs"></span>
+                                            <span class="pic-text text-right">HD</span>
+                                        </a>
+                                    </div>
+                                    <div class="detail">
+                                        <h3 class="title"><a
+                                                @click.perevent="selectmoive(moive.id)">{{ moive.title }}</a></h3>
+                                        <p><span class="text-muted">导演：</span>{{ moive.director }}</p>
+                                        <p><span class="text-muted">主演：</span>{{ moive.star }}</p>
+                                        <p class="hidden-mi"><span class="text-muted">类型：</span>{{ moive.type }}<span
+                                                class="split-line"></span><span
+                                                class="text-muted">地区：</span>{{ moive.area }}<span
+                                                class="hidden-xs"><span class="split-line"></span><span
+                                                class="text-muted">年份：</span>{{ moive.year }}</span></p>
+                                        <p class="margin-0 ">
+                                            <a class="btn btn-min btn-primary" @click.perevent="playermoive(moive.id)">立即播放</a>&nbsp;
+                                        </p>
+                                    </div>
+                                </li></ul>
+                                </div>
+                                </div>
+                                </div>
+                            {% endverbatim myblock %}
+            <!-- 翻页  -->
+        </div>
+
+    </div>
+</div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="stui-foot clearfix">
+
+            <p class="text-muted text-center visible-xs">电影网-</p>
+        </div>
+    </div>
+</div>
+<ul class="stui-extra clearfix">
+    <li>
+        <a class="backtop" href="javascript:scroll(0,0)" style="display: none;"><i class="icon iconfont icon-less"></i></a>
+    </li>
+    <li class="hidden-xs">
+        <a class="copylink" href="javascript:;"><i class="icon iconfont icon-share"></i></a>
+    </li>
+    <li class="visible-xs">
+        <a class="open-share" href="javascript:;"><i class="icon iconfont icon-share"></i></a>
+    </li>
+    <li class="hidden-xs">
+        <span><i class="icon iconfont icon-qrcode"></i></span>
+        <div class="sideslip">
+            <div class="col-pd text-center">
+                <p id="qrcode"></p>
+                <p class="margin-0">扫码用手机访问</p>
+            </div>
+        </div>
+    </li>
+    <li>
+        <a href="/gbook.html"><i class="icon iconfont icon-comments"></i></a>
+    </li>
+</ul>
+<ul class="stui-page text-center clearfix">
+	<li><a @click.perevent="shangyye">上一页</a></li>
+	<li><a @click.perevent="xiayiye">下一页</a></li>
+</ul>
+</div>
+<div class="hide"></div>
+</div>
+</body>
+<script>
+    new Vue({
+        el: "#content",
+        data: {
+            sousmoive: [],
+            sous: "",
+            currpage:1
+        },
+        methods: {
+            selectmoive: function (id) {
+                window.location.href ="/selectmoiveid?id="+id
+            },
+            sousmoivemesssage: function () {
+                window.location.href = "/sousmoivemessage/?sous=" + this.sous
+                this.sous = ""
+            },
+            playermoive:function (id) {
+                {#debugger#}
+                window.location.href = "/playermoive/?id=" + id
+            },
+            shangyye: function () {
+                    var souscontent = $("#souscontent").val()
+                    var that = this
+                    axios.get(
+                        "http://127.0.0.1:9000/sousmoive/", {
+                            params: {
+                                souscontent: souscontent,
+                                currpage: this.currpage - 1
+                            }
+                        }
+                    ).then(function (res) {
+                            that.sousmoive = res.data.sousmoive
+                            that.currpage=res.data.currpage
+                        }
+                    ).catch(function (e) {
+                        console.log(e)
+                    })
+                },  xiayiye: function () {
+                    var souscontent = $("#souscontent").val()
+                    console.log(souscontent)
+                    var that = this
+                    axios.get(
+                        "http://127.0.0.1:9000/sousmoive/", {
+                            params: {
+                                souscontent: souscontent,
+                                currpage: this.currpage + 1
+                            }
+                        }
+                    ).then(function (res) {
+                            that.sousmoive = res.data.sousmoive
+                            that.currpage=res.data.currpage
+                        }
+                    ).catch(function (e) {
+                        console.log(e)
+                    })
+                },
+        }, mounted: function () {
+            var souscontent = $("#souscontent").val()
+            console.log(souscontent)
+            var that = this
+            axios.get(
+                "/sousmoive/",
+                {
+                    params: {
+                        souscontent: souscontent
+                    }
+                }
+            ).then(res => {
+                that.sousmoive = res.data.sousmoive
+            }).catch(e => {
+                console.log(e)
+            })
+        }
+    })
+</script>
+</html>
